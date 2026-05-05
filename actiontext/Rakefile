@@ -7,13 +7,20 @@ require "rake/testtask"
 Rake::TestTask.new do |t|
   t.libs << "test"
   t.test_files = FileList["test/**/*_test.rb"].exclude("test/system/**/*", "test/dummy/**/*")
-  t.verbose = true
+  if ENV["CI"]
+    t.verbose = true
+    t.options = "--pofile"
+    t.options = "--defer-output"
+  end
 end
 
 Rake::TestTask.new "test:system" do |t|
   t.libs << "test"
   t.test_files = FileList["test/system/**/*_test.rb"]
-  t.verbose = true
+  if ENV["CI"]
+    t.verbose = true
+    t.options = "--defer-output"
+  end
 end
 
 namespace :test do
