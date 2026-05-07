@@ -1,3 +1,24 @@
+*   Add `f.datalist` to `FormBuilder`
+
+    Example:
+
+        <%= form_with model: @post do |f| %>
+           <%# Wire the input to the datalist using the same derived id: %>
+           <%= f.text_field :country, list: f.field_id(:country, :datalist) %>
+           <%= f.datalist  :country, ["Argentina", "Brazil", "Chile"] %>
+        <% end %>
+
+          Produces:
+          <input list="post_country_datalist" type="text"
+                 name="post[country]" id="post_country" />
+          <datalist id="post_country_datalist">
+            <option value="Argentina">Argentina</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Chile">Chile</option>
+          </datalist>
+
+      *Tahsin Hasan*
+
 *   Add `datalist_tag` to create `datalist` form elements.
 
     Example:
